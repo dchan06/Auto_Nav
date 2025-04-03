@@ -14,8 +14,8 @@ protected:
     double fuelCap;
     std::pair<int, int> currentLocation;
     std::string name;
-    double timeTaken;\
-    void setTimeTaken();
+    double timeTaken;
+    void setTimeTaken(double time);
 public:
     AutonomousVehicle(double mS, double fC, std::pair<int, int> cL, std::string n);
     virtual ~AutonomousVehicle();

@@ -32,17 +32,18 @@ double AutonomousVehicle::fuelConsumption(const double distance){
     return rateOfConsumption * distance;
 }
 
-void AutonomousVehicle::setTimeTaken() {
-    timeTaken = moveTo(100,100);
+void AutonomousVehicle::setTimeTaken(const double time) {
+    timeTaken = time;
 }
 
 void AutonomousVehicle::assessVehicles(const std::vector<AutonomousVehicle*> &veh) {
-    int fastestVeh;
+    int fastestVeh = 0;
     for (auto v : veh) {
-        v->setTimeTaken();
+        v->setTimeTaken(v->moveTo(100,100));
+        std::cout << v->timeTaken << std::endl;
     }
     for (int i = 1; i < veh.size(); i++) {
-        fastestVeh = (veh[i]->timeTaken < veh[i-1]->timeTaken ? i : i-1);
+        fastestVeh = (veh[i]->timeTaken < veh[fastestVeh]->timeTaken ? i : fastestVeh);
     }
-    std::cout << veh[fastestVeh]->name << std::endl;
+    std::cout << veh[fastestVeh]->name << " will reach the fastest" << std::endl;
 }
